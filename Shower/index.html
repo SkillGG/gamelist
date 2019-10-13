@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Game Studio</title>
+	<script defer src='hide.js'></script>
+	<script src='modals.js'></script>
+	<link rel="stylesheet" type="text/css" href="modals.css">
+	<script defer src='load.js'></script>
+	<style>
+	table {
+	  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	table td, table th {
+	  border: 1px solid #ddd;
+	  padding: 8px;
+	}
+	table #check tr:nth-child(even){background-color: #f2f2f2;}
+	input[type=number] {
+		width: 35px;
+	}
+
+	table #check tr:hover {background-color: #ddd;}
+
+	table th {
+	  padding-top: 12px;
+	  padding-bottom: 12px;
+	  text-align: left;
+	  background-color: #4CAF50;
+	  color: white;
+	}
+	.go {
+		border: 1px solid #ddd;
+		box-shadow: 3px 2px;
+		background-color: #f2f2f2;
+		padding: 2px;
+		margin-left: 5px;
+	}
+	.go:hover {
+		box-shadow: 2px 2px;
+	}
+	.go:active {
+		box-shadow: 1px 1px;
+		background-color: #ddd;
+	}
+	#topper {
+		margin: 0px;
+		padding: 0px;
+		position: sticky;
+		background-color: #ddd;
+		top: 0px;
+		width: 100%;
+		height: 23px;
+		border: #f2f2f2 1px solid;
+	}
+	#filter2 {
+		margin-right: 20px;
+		border: 2px solid #4caf50;
+		-webkit-box-shadow: 2px 2px 5px #000;
+		-moz-box-shadow: 2px 2px 5px #000;
+		box-shadow: 2px 2px 5px #000;
+		float: right;
+		max-width: 40px;
+		padding-left: 2px;
+		width: initial;
+		padding-right: 2px;
+		padding-top: 1px;
+		padding-bottom: 0px;
+		background-color: #4ca;
+		height: 20px;
+		font-size: 15px;
+		-webkit-transition-duration: 0.1s; /* Safari */
+    	transition-duration: 0.1s;
+	}
+	#filter2:active {
+		-webkit-box-shadow: 1px 1px 1px 1px gray;
+		-moz-box-shadow: 1px 1px 1px 1px gray;
+		box-shadow: 1px 1px 1px 1px gray;
+	}
+	#filter {
+		border: 2px solid #4caf50;
+		-webkit-box-shadow: 2px 2px 5px #000;
+		-moz-box-shadow: 2px 2px 5px #000;
+		box-shadow: 2px 2px 5px #000;
+		float: right;
+		max-width: 40px;
+		padding-left: 2px;
+		width: initial;
+		padding-right: 2px;
+		padding-top: 1px;
+		padding-bottom: 0px;
+		background-color: #4ca;
+		height: 20px;
+		font-size: 15px;
+		-webkit-transition-duration: 0.1s; /* Safari */
+    	transition-duration: 0.1s;
+	}
+	#filter:active {
+		-webkit-box-shadow: 1px 1px 1px 1px gray;
+		-moz-box-shadow: 1px 1px 1px 1px gray;
+		box-shadow: 1px 1px 1px 1px gray;
+	}
+	</style>
+</head>
+<body>
+	<div id='topper'>&emsp;&emsp;<span id='count'></span>&emsp;<span id='info'></span><span id='filter'>Filter</span></div>
+	<modal>
+		<div style='background-color: white;width: 70%;height:50%;position:relative;margin-left:auto;margin-right:auto;top:25%'>
+			<div>
+				<label><input type='checkbox' id='modal-Filter'> Filter</label>
+			</div>
+			<label>&emsp;<input type="checkbox" id='modal-Filter-Name'> By name</label>
+			<center>
+				<label><input type='checkbox' id='modal-Filter-Name-Invert'>Invert</label>
+				<br>
+				<label><input type="checkbox" id='modal-Filter-Name-RX-E'><input type="text" id='modal-Filter-Name-RX'> Matches</label>
+				<br>
+				<label><input type="checkbox" id='modal-Filter-Name-EQ-E'><input type="text" id='modal-Filter-Name-EQ'> Equals</label>
+			</center>
+			<label>&emsp;<input type="checkbox" id='modal-Filter-Incol'> By appearance in collection</label>
+			<center>
+				<label><input type="checkbox" id='modal-Filter-Incol-EQ'> Appears</label>
+			</center>
+			<label>&emsp;<input type="checkbox" id='modal-Filter-State'> By state</label>
+			<center>
+				<label><input type="number" id='modal-Filter-State-EQ' style='width: 100px;text-align: right;'> Equals</label>
+			</center>
+			<label>&emsp;<input type="checkbox" id='modal-Filter-Num'> No.</label>
+			<center>
+				<label><input type="number" min=1 id='modal-Filter-Num-S' style='width: 100px;text-align: right;'> Start</label>
+				<br>
+				<label><input type="number" min=2 id='modal-Filter-Num-E' style='width: 100px;text-align: right;'> End</label>
+			</center>
+			<label>&emsp;<input type="checkbox" id='modal-Filter-Quan'> Quantity</label>
+			<center>
+				<label><input type="number" id='modal-Filter-Quan-EQ'> Number</label>
+			</center>
+			<div style='align-self: right'>
+				<span id='filter2'>Filter</span>
+			</div>
+		</div>
+	</modal>
+	<span>States:<br>1 - Not present&emsp;2 -  Wanted/Next<br>3 - Downloaded/Unchecked<br>4 - Not working / No accessory/ DS2<br>5 - No English&emsp;&emsp;6 - Good</span>
+	<br>
+	<table id='things'>
+		<tr id='header'>
+			<th>No.</th>
+			<th>Name</th>
+			<th>In Collection</th>
+			<th>Link</th>
+		</tr>
+		<tbody id='check'>
+		</tbody>
+	</table>
+</body>
+</html>
