@@ -1,0 +1,95 @@
+:root {
+    --dark: #000;
+    --color: #CCC9DC;
+    --text: #D1CEDF;
+    --back: #1B2A41;
+    --lightback: #909CC2;
+    --darkrow: #0C1821;
+    --lightrow: #324A5F;
+    --tint: #7A93AC;
+    --darktext: #0C1821;
+    --white: white;
+    --black: black;
+}
+
+body {
+    background-color: var(--back);
+    color: var(--text);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#maintable {
+    border: 2px solid var(--dark);
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+
+#maintable tr {
+    border: 1px solid var(--dark);
+    background-color: var(--darkrow);
+}
+
+#maintable td {
+    padding: 5px 15px;
+    border: 1px solid var(--dark);
+}
+
+#maintable tbody tr:nth-child(2n) {
+    background-color: var(--lightrow);
+}
+
+#maintable tbody tr:hover {
+    background-color: var(--tint);
+}
+
+#maintable tbody tr:hover .genlist,
+#maintable tbody tr:hover td {
+    color: var(--darktext);
+}
+
+#maintable th {
+    border: 1px solid var(--dark);
+    padding: 10px;
+}
+
+td:not(.gamecolumn) {
+    padding: 0;
+    width: 1%;
+}
+
+.gamecolumn {
+    width: 100%;
+}
+
+.gameinfo {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+}
+
+.gameinfo>div {
+    display: inline;
+}
+
+.nametag {
+    font-weight: bolder;
+    color: var(--text);
+    font-size: 1.3rem;
+}
+
+.genlist {
+    color: var(--lightback);
+    list-style: none;
+    text-align: center;
+    font-size: 0.7rem;
+    margin: 1px;
+}
+
+.genlist li {
+    display: inline;
+}
+
+.genlist li:not(:last-child):not(:nth-last-child(2)):after {
+    content: ",";
+}
